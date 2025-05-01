@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.logic.MainController">
+   <center>
+       <AnchorPane prefHeight="400.0" prefWidth="600.0">
+           <Label layoutX="14.0" layoutY="14.0" text="Введіть n" AnchorPane.leftAnchor="14.0" />
+           <Label layoutX="14.0" layoutY="45.0" text="Number of treads" AnchorPane.leftAnchor="14.0" />
+           <TextField fx:id="n" layoutX="118.0" layoutY="9.0" prefHeight="26.0" prefWidth="110.0" />
+           <TextField fx:id="numberOfThreads" layoutX="118.0" layoutY="40.0" prefHeight="26.0" prefWidth="110.0" />
+         <Button layoutX="13.0" layoutY="73.0" mnemonicParsing="false" onAction="#calculate" prefWidth="102.0" text="Calculate" AnchorPane.leftAnchor="14.0" />
+       </AnchorPane>
+   </center>
+   <top>
+       <MenuBar BorderPane.alignment="CENTER">
+           <Menu mnemonicParsing="false" text="File">
+               <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
+           </Menu>
+           <Menu mnemonicParsing="false" text="Help">
+               <MenuItem mnemonicParsing="false" onAction="#info" text="About" />
+           </Menu>
+       </MenuBar>
+   </top>
+</BorderPane>

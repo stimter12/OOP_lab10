@@ -1,22 +1,22 @@
 package main.calculator;
 
-import main.Main;
+import main.logic.MainController;
 
 import java.util.function.DoubleUnaryOperator;
 
 public class RunnableIntegralCalculator implements Runnable{
 
     private IntegralCalculator integralCalculator;
-    private Main main;
+    private MainController mainController;
 
-    public RunnableIntegralCalculator(double a, double b, int n, DoubleUnaryOperator f, Main main) {
+    public RunnableIntegralCalculator(double a, double b, int n, DoubleUnaryOperator f, MainController mainController) {
         integralCalculator=new IntegralCalculator(a,b,n,f);
-        this.main=main;
+        this.mainController=mainController;
     }
 
     @Override
     public void run() {
         double value=integralCalculator.calculate();
-        main.sendResult(value);
+        mainController.sendResult(value);
     }
 }

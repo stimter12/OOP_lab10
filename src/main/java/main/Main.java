@@ -1,54 +1,21 @@
 package main;
 
-import main.calculator.RunnableIntegralCalculator;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import java.util.function.DoubleUnaryOperator;
-
-public class Main {
+public class Main extends Application {
     public static void main(String[] args) {
-        Main main = new Main();
-        main.run();
+        launch(args);
     }
 
-    private static double function(double x) {
-        return Math.cos(x) / Math.pow(x, 3);
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("main.fxml"));
+        Scene scene = new Scene(loader.load(), 250, 130);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Integral Calculator");
+        primaryStage.show();
     }
-
-    private void run() {
-        double a = 1;
-        double b = 2;
-        int n = 100_000_000;
-        DoubleUnaryOperator f = Main::function;
-        long start = System.currentTimeMillis();
-        int numberOfThreads = 100;
-        double delta = (b-a)/numberOfThreads;
-        for (int i = 0; i < numberOfThreads; i++) {
-            double ai = a + i * delta;
-            double bi = ai + delta;
-            int ni = n / numberOfThreads;
-            Thread.startVirtualThread(new RunnableIntegralCalculator(ai,bi,ni,f,this));
-        }
-        try {
-            synchronized (this) {
-                while (finished < numberOfThreads) {
-                    wait();
-                }
-            }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        long finish = System.currentTimeMillis();
-
-        System.out.println("v = " + totalSum);
-        System.out.println("time = " + (finish - start));
-    }
-
-    public synchronized void sendResult(double value) {
-        totalSum+=value;
-        finished++;
-        notify();
-    }
-    double totalSum=0;
-    int finished=0;
 }
